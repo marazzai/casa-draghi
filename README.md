@@ -77,7 +77,7 @@ all'`id` di una sezione:
 
 ## Logo e foto
 
-- Il **logo dei Draghi** è in `public/logo-draghi.png`. Per sostituirlo, metti il
+- Il **logo dei Draghi** è in `public/logo-draghi.svg`. Per sostituirlo, metti il
   nuovo file con lo stesso nome (o aggiorna il percorso in `content.ts` → `site.logo`).
 - Il sito usa blocchi grafici, pattern e linee di campo come placeholder. Quando
   avrai **foto reali** (campo, squadra, impianto, volontari), potrai inserirle
@@ -97,7 +97,7 @@ caricati da Google Fonts in `index.html`.
 casa-draghi-site/
 ├─ index.html              meta title/description, Open Graph, favicon, font
 ├─ public/
-│  ├─ logo-draghi.png       logo della squadra
+│  ├─ logo-draghi.svg       logo della squadra
 │  └─ favicon.svg           favicon
 ├─ src/
 │  ├─ main.tsx              punto di ingresso React

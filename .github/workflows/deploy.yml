@@ -1,9 +1,9 @@
 name: Deploy su GitHub Pages
 
-# Builda il sito ad ogni push su main e lo pubblica su GitHub Pages.
+# Builda il sito ad ogni push su master/main e lo pubblica su GitHub Pages.
 on:
   push:
-    branches: [main]
+    branches: [master, main]
   workflow_dispatch:
 
 permissions:

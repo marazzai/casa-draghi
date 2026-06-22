@@ -21,6 +21,46 @@ export const site = {
   logo: "./logo-draghi.svg",
 };
 
+/* Marquee / ticker scorrevole ----------------------------------- */
+export const marquee: string[] = [
+  "Dove il rugby diventa territorio",
+  "Lascia il segno",
+  "Campo · Fango · Comunità",
+  "Il tuo contributo resta qui",
+  "Sport amatoriale, impegno vero",
+  "Una squadra, un campo, una comunità",
+];
+
+/* Frasi-statement a tutto schermo (sezioni di stacco) ----------- */
+export interface Statement {
+  kicker: string;
+  big: string;
+  sub?: string;
+  /** parola/e da evidenziare in rame dentro `big` */
+  accent?: string;
+}
+
+export const statements: Record<string, Statement> = {
+  mark: {
+    kicker: "Il principio",
+    big: "Non compri visibilità. Lasci un segno.",
+    accent: "Lasci un segno.",
+    sub: "Con Casa Draghi il tuo contributo non è uno slogan: è un campo più curato, uno spazio che rinasce, una squadra più riconoscibile.",
+  },
+  here: {
+    kicker: "La promessa",
+    big: "Il tuo contributo resta qui.",
+    accent: "resta qui.",
+    sub: "In un impianto, in una squadra e in un pezzo di territorio.",
+  },
+  hands: {
+    kicker: "Il metodo",
+    big: "Casa Draghi si costruisce con le mani di chi la vive.",
+    accent: "le mani di chi la vive.",
+    sub: "Volontari, ex giocatori, amici. Una squadra amatoriale può gestire un impianto con serietà.",
+  },
+};
+
 /* Menu di navigazione (ancore interne) -------------------------- */
 export interface NavItem {
   id: string;

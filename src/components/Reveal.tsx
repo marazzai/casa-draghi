@@ -1,4 +1,11 @@
-import { useEffect, useRef, useState, type ReactNode, type ElementType } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+  type ElementType,
+  type CSSProperties,
+} from "react";
 
 interface RevealProps {
   children: ReactNode;
@@ -7,13 +14,14 @@ interface RevealProps {
   /** tag HTML da renderizzare (default div) */
   as?: ElementType;
   className?: string;
+  style?: CSSProperties;
 }
 
 /**
  * Avvolge un contenuto e lo anima in ingresso quando entra nel viewport
  * (Intersection Observer). Rispetta prefers-reduced-motion via CSS.
  */
-export default function Reveal({ children, delay = 0, as, className = "" }: RevealProps) {
+export default function Reveal({ children, delay = 0, as, className = "", style }: RevealProps) {
   const Tag: ElementType = as ?? "div";
   const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -45,6 +53,7 @@ export default function Reveal({ children, delay = 0, as, className = "" }: Reve
       ref={ref}
       className={`reveal ${visible ? "is-visible" : ""} ${className}`.trim()}
       data-delay={delay || undefined}
+      style={style}
     >
       {children}
     </Tag>

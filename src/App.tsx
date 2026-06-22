@@ -8,6 +8,11 @@ import SponsorCard from "./components/SponsorCard";
 import CostTable from "./components/CostTable";
 import EventCard from "./components/EventCard";
 import Contact from "./components/Contact";
+import ScrollProgress from "./components/ScrollProgress";
+import Marquee from "./components/Marquee";
+import Statement from "./components/Statement";
+import Media from "./components/Media";
+import { FieldLines, DolomitesRidge, Topo } from "./components/Art";
 
 import {
   manifesto,
@@ -32,11 +37,14 @@ import {
   nextSteps,
   finalCta,
   site,
+  marquee,
+  statements,
 } from "./data/content";
 
 export default function App() {
   return (
     <>
+      <ScrollProgress />
       <a className="skip" href="#progetto">
         Salta al contenuto
       </a>
@@ -45,6 +53,9 @@ export default function App() {
       <main>
         {/* 1. HERO ------------------------------------------------ */}
         <Hero />
+
+        {/* ticker scorrevole */}
+        <Marquee items={marquee} duration={34} />
 
         {/* 2. MANIFESTO (ancora: progetto) ----------------------- */}
         <section id="progetto" className="section section--field">
@@ -69,6 +80,9 @@ export default function App() {
           </div>
         </section>
 
+        {/* STATEMENT — Non compri visibilità --------------------- */}
+        <Statement data={statements.mark} />
+
         {/* 3. SITUAZIONE ATTUALE --------------------------------- */}
         <Section
           id="situazione"
@@ -79,10 +93,10 @@ export default function App() {
         >
           <Stats items={situationStats} />
 
-          <div className="grid grid--2" style={{ marginTop: "1.4rem" }}>
-            <Reveal className="card">
+          <div className="split-media" style={{ marginTop: "2rem" }}>
+            <Reveal>
               <>
-                <h3 className="space__name" style={{ fontSize: "1.3rem", marginBottom: "0.6rem" }}>
+                <h3 className="space__name" style={{ fontSize: "1.5rem", marginBottom: "0.8rem" }}>
                   L'impianto di Arten
                 </h3>
                 <ul className="facility">
@@ -92,25 +106,29 @@ export default function App() {
                 </ul>
               </>
             </Reveal>
-            <Reveal className="card" delay={1}>
-              <>
-                <h3 className="space__name" style={{ fontSize: "1.3rem", marginBottom: "0.6rem" }}>
-                  Non solo Draghi
-                </h3>
-                <p className="space__desc">
-                  L'impianto è uno spazio sportivo condiviso. I Draghi ne sono il soggetto responsabile,
-                  ma non è chiuso o esclusivo: è vissuto anche da altre realtà.
-                </p>
-                <ul className="partner" style={{ marginTop: "0.4rem" }}>
-                  {otherUsers.map((u) => (
-                    <li key={u} style={{ color: "var(--cream-dim)", padding: "0.4rem 0" }}>
-                      {u}
-                    </li>
-                  ))}
-                </ul>
-              </>
-            </Reveal>
+            <Media label="Spazio per una foto reale dell'impianto" style={{ minHeight: 340 }}>
+              <FieldLines className="media__art" />
+            </Media>
           </div>
+
+          <Reveal className="card" delay={1} style={{ marginTop: "1.4rem" }}>
+            <>
+              <h3 className="space__name" style={{ fontSize: "1.3rem", marginBottom: "0.6rem" }}>
+                Non solo Draghi
+              </h3>
+              <p className="space__desc">
+                L'impianto è uno spazio sportivo condiviso. I Draghi ne sono il soggetto responsabile,
+                ma non è chiuso o esclusivo: è vissuto anche da altre realtà.
+              </p>
+              <div className="tagline">
+                {otherUsers.map((u) => (
+                  <span className="chip" key={u}>
+                    {u}
+                  </span>
+                ))}
+              </div>
+            </>
+          </Reveal>
         </Section>
 
         {/* 4. PERCHÉ SERVE --------------------------------------- */}
@@ -144,13 +162,11 @@ export default function App() {
           </div>
         </Section>
 
+        {/* STATEMENT — Il tuo contributo resta qui --------------- */}
+        <Statement data={statements.here} />
+
         {/* 5. OBIETTIVI ------------------------------------------ */}
-        <Section
-          id="obiettivi"
-          variant="alt"
-          eyebrow="Gli obiettivi"
-          title="Cinque cose da costruire"
-        >
+        <Section id="obiettivi" variant="alt" eyebrow="Gli obiettivi" title="Cinque cose da costruire">
           <div className="grid grid--3">
             {goals.map((g, i) => (
               <Reveal key={g.num} className="card goal" delay={(i % 3) + 1}>
@@ -180,6 +196,9 @@ export default function App() {
             ))}
           </div>
         </Section>
+
+        {/* STATEMENT — Casa Draghi si costruisce con le mani ----- */}
+        <Statement data={statements.hands} />
 
         {/* 7. SPONSOR — Lascia il Segno -------------------------- */}
         <Section
@@ -271,7 +290,6 @@ export default function App() {
             ))}
           </div>
 
-          {/* Quadro economico primo anno */}
           <Reveal>
             <div className="budget">
               <div className="budget__head">
@@ -340,6 +358,20 @@ export default function App() {
           title="Un progetto aperto al paese"
           lead="Casa Draghi non vuole restare chiuso nei confini della squadra."
         >
+          <div className="split-media" style={{ marginBottom: "2rem" }}>
+            <Media label="Spazio per una foto del territorio" style={{ minHeight: 300 }}>
+              <Topo className="media__art" />
+              <DolomitesRidge className="media__art" />
+            </Media>
+            <Reveal>
+              <p className="section__lead" style={{ maxWidth: "46ch" }}>
+                L'impianto è comunale e vissuto da più realtà: Casa Draghi vuole essere un progetto
+                ordinato, sostenibile e <span className="accent">aperto al territorio</span>, con i
+                Draghi come soggetto responsabile della cura e della valorizzazione.
+              </p>
+            </Reveal>
+          </div>
+
           <div className="grid grid--3">
             {territory.map((p, i) => (
               <Reveal key={p.name} className="card partner" delay={(i % 3) + 1}>
@@ -375,12 +407,7 @@ export default function App() {
         </Section>
 
         {/* 13. PROSSIMI PASSI ------------------------------------ */}
-        <Section
-          id="prossimi-passi"
-          variant="alt"
-          eyebrow="Prossimi passi"
-          title="Da dove si comincia"
-        >
+        <Section id="prossimi-passi" variant="alt" eyebrow="Prossimi passi" title="Da dove si comincia">
           <Reveal>
             <ol className="steps">
               {nextSteps.map((s) => (
@@ -389,6 +416,9 @@ export default function App() {
             </ol>
           </Reveal>
         </Section>
+
+        {/* ticker prima della chiusura */}
+        <Marquee items={marquee} reverse duration={38} />
 
         {/* 14. CTA FINALE + CONTATTI (ancora: contatti) ---------- */}
         <section id="contatti" className="section cta">
